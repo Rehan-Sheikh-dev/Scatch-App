@@ -1,0 +1,12 @@
+{
+  "name": "scatch",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "Rehan Sheikh",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
