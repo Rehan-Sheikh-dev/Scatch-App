@@ -2,7 +2,12 @@ import express from 'express';
 import { fileURLToPath } from "url";
 import path from "path";
 import cookieParser from 'cookie-parser';
+import connectDB from './config/mongoose-connection.js';
+import ownerRouter from './routes/owner.routes.js';
+import userRoter from './routes/user.routes.js';
+import productRouter from './routes/product.routes.js';
 
+connectDB();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const app = express();
@@ -12,6 +17,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser());
 app.set('view engine', 'ejs');
+app.use('/owner',ownerRouter)
+app.use('/product',productRouter)
+app.use('/user',userRoter)
+
 
 app.get('/', (req, res) => {
 res.send('Hello, World!');

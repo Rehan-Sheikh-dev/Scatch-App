@@ -1,11 +1,5 @@
 import mongoose from "mongoose";
 
-try {
-mongoose.connect(`mongodb://127.0.0.1:27017/scatch`)
-} catch (err) {
-    console.log("Error connecting to MongoDB:", err);
-}
-
 const userSchema = new mongoose.Schema({
     fullname: String,
     email: String,
