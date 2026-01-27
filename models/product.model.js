@@ -11,8 +11,7 @@ discount: {
 bgcolor: String,
 panelcolor: String,
 textcolor: String
-})
+});
 
 const product = mongoose.model('product', productSchema);
-
 export default product;

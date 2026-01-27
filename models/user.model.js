@@ -1,6 +1,10 @@
 import mongoose from "mongoose";
 
-mongoose.connect(`mongodb://127.0.0.1:27017/scatch`);
+try {
+mongoose.connect(`mongodb://127.0.0.1:27017/scatch`)
+} catch (err) {
+    console.log("Error connecting to MongoDB:", err);
+}
 
 const userSchema = new mongoose.Schema({
     fullname: String,
@@ -8,17 +12,16 @@ const userSchema = new mongoose.Schema({
     password: String,
     cart: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'product'
+        ref: 'product',
     }],
     isAdmin: Boolean,
     orders: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'order'
+        ref: 'order',
     }],
     contactNumber: Number,
     picture: String
-})
+});
 
 const user = mongoose.model('user', userSchema);
-
 export default user;
