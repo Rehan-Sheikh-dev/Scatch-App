@@ -1,0 +1,24 @@
+import mongoose from "mongoose";
+
+mongoose.connect(`mongodb://127.0.0.1:27017/scatch`);
+
+const userSchema = new mongoose.Schema({
+    fullname: String,
+    email: String,
+    password: String,
+    cart: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'product'
+    }],
+    isAdmin: Boolean,
+    orders: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'order'
+    }],
+    contactNumber: Number,
+    picture: String
+})
+
+const user = mongoose.model('user', userSchema);
+
+export default user;
