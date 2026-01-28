@@ -8,7 +8,6 @@ const userSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'product',
     }],
-    isAdmin: Boolean,
     orders: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'order',

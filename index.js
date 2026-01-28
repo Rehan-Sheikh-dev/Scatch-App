@@ -24,7 +24,8 @@ app.use('/user',userRoter)
 app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
-res.send('Hello, World!');
+res.render('index');
+// res.send('Hello World!');
 console.log(process.env.NODE_ENV);
 });
 
