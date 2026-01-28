@@ -25,6 +25,7 @@ app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
 res.send('Hello, World!');
+console.log(process.env.NODE_ENV);
 });
 
 app.listen(process.env.PORT, () => {
