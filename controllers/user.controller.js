@@ -2,7 +2,7 @@ import bcrypt from "bcrypt"
 import generateToken from '../utils/generateToken.js';
 import userModel from "../models/user.model.js";
 
-const userController = async(req,res)=>{
+ export const userController = async(req,res)=>{
     try {
         const {email,fullname,password} = req.body;
 
@@ -30,4 +30,19 @@ const userController = async(req,res)=>{
 
 }
 
-export default userController;
+ export const loginController = async(req,res)=>{
+    try {
+        const {email,password} = req.body;
+        const user = await userModel.findOne({email});
+        if(!user) return res.status(401).send("User doesn't exist!");
+        bcrypt.compare(password,user.password,function(err,result){
+            if(err) return res.status(500).send("Error comparing passwords");
+            if(!result) return res.status(401).send("Invalid credentials");
+            const token = generateToken(user);
+            res.cookie("token",token);
+            res.status(200).send("User logged in successfully");
+        }) 
+    } catch (error) {
+        res.send(error)
+    }
+}

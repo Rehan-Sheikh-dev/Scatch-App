@@ -3,6 +3,8 @@ import { fileURLToPath } from "url";
 import path from "path";
 import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
+import expressSession from 'express-session';
+import flash from 'connect-flash';
 import connectDB from './config/mongoose-connection.js';
 import ownerRouter from './routes/owner.routes.js';
 import userRoter from './routes/user.routes.js';
@@ -18,6 +20,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser());
+app.use(
+    expressSession({
+     resave: false,
+     saveUninitialized: false,
+     secret: process.env.SESSION_SECRET,
+    }
+))
 app.use('/owner',ownerRouter)
 app.use('/product',productRouter)
 app.use('/user',userRoter)
