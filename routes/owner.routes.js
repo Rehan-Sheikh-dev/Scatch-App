@@ -1,17 +1,33 @@
-import express from 'express';
-import ownerController from '../controllers/owner.controller.js';
+import express from "express";
+import upload from "../config/multer.config.js"; // memoryStorage
+import ownerController from "../controllers/owner.controller.js";
+import productModel from "../models/product.model.js";
 
-const app = express.Router();
+const router = express.Router();
 
-app.get("/", (req, res) => {
-  res.send("hey boy this is the owner page!!");
-})
+router.get("/admin", async (req, res) => {
+  try {
+    const products = await productModel.find();
 
-app.post("/create", ownerController)
+    res.render("createProducts", {
+      products,
+      success: req.flash("success"),
+      error: req.flash("error")
+    });
 
-app.get('/admin',(req,res)=>{
-  
-})
+  } catch (err) {
+    res.render("createProducts", {
+      products: [],
+      error: ["Failed to load products"]
+    });
+  }
+});
 
-export default app;
 
+router.post(
+  "/product/create",
+  upload.single("image"),
+  ownerController
+);
+
+export default router;

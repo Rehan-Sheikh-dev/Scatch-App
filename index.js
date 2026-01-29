@@ -21,14 +21,14 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser());
 app.use(expressSession({resave: false,saveUninitialized: false,secret: process.env.SESSION_SECRET,}))
-app.use('/owner',ownerRouter)
-app.use('/product',productRouter)
-app.use('/user',userRoter)
+app.use('/owners',ownerRouter)
+app.use('/products',productRouter)
+app.use('/users',userRoter)
 app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
-// res.render('index');
 console.log(process.env.NODE_ENV);
+res.render("index");
 });
 
 app.listen(process.env.PORT, () => {

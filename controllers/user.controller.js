@@ -40,7 +40,7 @@ import userModel from "../models/user.model.js";
             if(!result) return res.status(401).send("Invalid credentials");
             const token = generateToken(user);
             res.cookie("token",token);
-            res.status(200).send("User logged in successfully");
+            res.render("createproducts")
         }) 
     } catch (error) {
         res.send(error)
