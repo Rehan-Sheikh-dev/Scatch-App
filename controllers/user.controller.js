@@ -46,3 +46,9 @@ import userModel from "../models/user.model.js";
         res.send(error)
     }
 }
+
+export const logoutController = (req,res)=>{
+    res.cookie("token","");
+    res.status(200).send("User logged out successfully");
+    res.redirect("/");
+}

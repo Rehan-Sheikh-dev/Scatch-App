@@ -9,5 +9,9 @@ app.get("/", (req, res) => {
 
 app.post("/create", ownerController)
 
+app.get('/admin',(req,res)=>{
+  
+})
+
 export default app;
 
